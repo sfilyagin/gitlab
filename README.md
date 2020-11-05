@@ -10,7 +10,7 @@
 * Свободный 8080/80 порт
 #### Инструкция по сборке запуску приложения
 
-## Клонирование исходного кода в Git
+## Клонирование исходного кода из Git
 
 * ```cd \<project dir\>```
 * ```git clone https://github.com/sfilyagin/gitlab```
@@ -20,20 +20,36 @@
 * ```mvnw clean install```
 
 
-* Склонировать репозиторий
-* Для сборки, запуска приложения и его окружения необходимо из директории с кодовой базой выполнить команду __docker-compose up -d__
-* Сборка приложения выполняется в отдельном контейнере, затем создается образ в который копируется неше приложение (процедура сборки и копирования описана в Dockerfile)
-#### Проверки
+Перед этим можно запустить и инициализировать базу данных
+Запустить базу данных можно так:
+ ```
+ docker run --name postgres-docker -e POSTGRES_PASSWORD=root -p 5432:5432 postgres
+```
+Инициализировать так: 
+```
+docker cp ./src/main/resources/init.sql postgres-docker:/docker-entrypoint-initdb.d/init.sql
+docker exec -u postgres postgres-docker psql postgres postgres -f docker-entrypoint-initdb.d/init.sql
+```
 
-------------------------------------------------------------------------
+## Cборка docker-образов
+В файле  описан способ сборки в Docker двух контейнеров для их совместной работы как одно приложение. Docker-compose будет использовать  для сборки приложения:
+Для сборки контейнеров выполнить команду:
+``` docker-compose build ```
+Для создания приложения выполнить команду:
+ ``` docker-compose create ```
+
+## Запуск docker-контейнеров
+Для запуска приложения выполнить команду:
+``` docker-compose up ```
+
+## Работа с приложением
+Приложение запускает веб-сервер, доступный локально через сокет localhost:8080.
+Веб-сервер имеет следующие конечные точки:
 __Status__
-* __getHostname:__ curl http://localhost/api/v1/status
 
-
-* ```curl -X GET http://127.0.0.1:8080/api/v1/status```
+* ```curl -X GET http://localhost:8080/api/v1/status```
 * ```curl -X GET http://localhost:8080/api/v1/products```
 * ```curl -X GET http://localhost:8080/api/v1/products/2```
 * ```curl -X DELETE http://localhost:8080/api/v1/products/2```
-
 
 
