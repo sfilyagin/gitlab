@@ -7,8 +7,8 @@ services:
 before_install:
   - chmod +x mvnw
 before_script:
-  - psql -c "CREATE USER simpleapi WITH PASSWORD 'q1w2e3r4';" -U postgres
-  - psql -c "CREATE DATABASE db_lab1 OWNER simpleapi;" -U postgres
+  - psql -c "CREATE USER simpleapi WITH PASSWORD 'root';" -U postgres
+  - psql -c "CREATE DATABASE postgres OWNER postgres;" -U postgres
 env:
   global:
     - secure: VGwcg3UmZWWGU6PNybD/xJIUvJUroNcdF3qMHvepq0UO9abzs11wbyLZUl9ciD6SBfhu8CL1nQuhAZJOLcZg8rOzBTiLeOi2fVMsUble6ng3kkmlS0iMH6ClpxejGUay1qT3rKT0+DtxfmcuTHVUjReYvZSJXjskvw6Uunf89iU+sJRyzXSH5Zs8BlOAhSb300e23JAqWyUU1wDW4FuzjjiyUEpX9Gc/ima4hIzzX6JkbscZkaHaX11WO/S77dqcEIOqCdp6kGFLVviDnCSQOop1m4gWRWt8Q9TQ9GBcrexmGUtWqSsJ2TH5qudVewHfcCRBACI0S+Fi/Okbc2zeTEX9idLFprv1IEnvyOhIecuckzw30l+Blw6AimwUE96Y6H/wtVCVAhGzVbYOgG3UZI05k/5nI/3xJcR5c7iayXeTGvZqxKoo+FnPDdN7VY9xAOMX4Rg6HJLxy+XUQulsn3LQpg1/w+76Rlp7n7PQ5rk8qYgqNuMaWkFjittiQXkLwt4o4Y16dUWZZs2hLVbNBN26nARAIpEtSah/YO+ylW0spBESP19ixi8pXTYXE9t6kd7a1dYWmAgG9UwgXRCEEy/zyZIH8+06rzo2RrnclyK+kR7JhWScsafCZ/jGHPpTiAynMdsKgW8WkWjbhKbmbeBJWOWHq/8HfULZXG2aWxM=
@@ -26,7 +26,6 @@ after_success:
   - docker build -t $IMAGE_NAME:latest .
   - docker tag $IMAGE_NAME:latest $IMAGE_NAME:$TAG
   - docker push $IMAGE_NAME:$TAG
-
 deploy:
   provider: heroku
   api_key: "$HEROKU_API_KEY"
