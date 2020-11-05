@@ -30,9 +30,10 @@ __Status__
 * __getHostname:__ curl http://localhost/api/v1/status
 
 
-* curl -X GET http://127.0.0.1:8080/api/v1/status
-* curl -X GET http://localhost:8080/api/v1/products
-* curl -X GET http://localhost:8080/api/v1/products/2
-* curl -X DELETE http://localhost:8080/api/v1/products/2
+* ```curl -X GET http://127.0.0.1:8080/api/v1/status```
+* ```curl -X GET http://localhost:8080/api/v1/products```
+* ```curl -X GET http://localhost:8080/api/v1/products/2```
+* ```curl -X DELETE http://localhost:8080/api/v1/products/2```
+
 
 
