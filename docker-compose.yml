@@ -8,31 +8,35 @@ services:
     volumes:
       - postgres-data:/var/lib/postgresql/data
       - ./src/main/resources/init.sql:/docker-entrypoint-initdb.d/init.sql
-    expose:
-      - 5432
+#      - "./postgres:/docker-entrypoint-initdb.d"
+#    expose:
+#      - 5432
     ports:
       - 5432:5432
     environment:
       - POSTGRES_PASSWORD=root
       - POSTGRES_USER=postgres
-      - POSTGRES_DB=simpledb
-      - POSTGRES_HOST=postgres
+      - POSTGRES_DB=postgres
+#      - POSTGRES_HOST=postgres
     restart: unless-stopped
-    networks: ['mynetwork']
+#    networks: ['mynetwork']
+    networks: localhost
   simpleapi:
     image: simpleapi:latest
     container_name: simple
-    build: ./
-    expose:
-      - 8080
+#    build: ./
+#    expose:
+#      - 8080
     ports:
-      - 8080:8080
+      - 80:80
     restart: unless-stopped
     depends_on:
       - postgres
-    links:
-      - postgres
-    networks: ['mynetwork']
+#    links:
+      - simpleapi
+#    networks: ['mynetwork']
+    networks: localhost
 volumes:
   postgres-data:
-networks: {mynetwork: {}}
+    networks: localhost
+#networks: {mynetwork: {}}

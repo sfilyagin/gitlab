@@ -4,25 +4,32 @@ language: java
 services:
   - postgresql
   - docker
+before_install:
+  - chmod +x mvnw
+before_script:
+  - psql -c "CREATE USER simpleapi WITH PASSWORD 'q1w2e3r4';" -U postgres
+  - psql -c "CREATE DATABASE db_lab1 OWNER simpleapi;" -U postgres
 env:
   global:
-    - secure: "VGwcg3UmZWWGU6PNybD/xJIUvJUroNcdF3qMHvepq0UO9abzs11wbyLZUl9ciD6SBfhu8CL1nQuhAZJOLcZg8rOzBTiLeOi2fVMsUble6ng3kkmlS0iMH6ClpxejGUay1qT3rKT0+DtxfmcuTHVUjReYvZSJXjskvw6Uunf89iU+sJRyzXSH5Zs8BlOAhSb300e23JAqWyUU1wDW4FuzjjiyUEpX9Gc/ima4hIzzX6JkbscZkaHaX11WO/S77dqcEIOqCdp6kGFLVviDnCSQOop1m4gWRWt8Q9TQ9GBcrexmGUtWqSsJ2TH5qudVewHfcCRBACI0S+Fi/Okbc2zeTEX9idLFprv1IEnvyOhIecuckzw30l+Blw6AimwUE96Y6H/wtVCVAhGzVbYOgG3UZI05k/5nI/3xJcR5c7iayXeTGvZqxKoo+FnPDdN7VY9xAOMX4Rg6HJLxy+XUQulsn3LQpg1/w+76Rlp7n7PQ5rk8qYgqNuMaWkFjittiQXkLwt4o4Y16dUWZZs2hLVbNBN26nARAIpEtSah/YO+ylW0spBESP19ixi8pXTYXE9t6kd7a1dYWmAgG9UwgXRCEEy/zyZIH8+06rzo2RrnclyK+kR7JhWScsafCZ/jGHPpTiAynMdsKgW8WkWjbhKbmbeBJWOWHq/8HfULZXG2aWxM="
-    - secure: "tc+Y4LwCvtXQWLhDSwk/4EKsOo7+3bc25x4+NSCsgZ7BXIgmuSBpfNMELPxThz5BkRWNXfLsNDbdkngXtcot9z21GBFWKJuA+SZ5ZTIFGWQfbFQJGdmzF9JhmSjyhObnlgbggRTDnkq1HKirh7TwXhR5VXcVno4pzH7qH7djuj4h6mw76uXaoUEce6pjmuW3gm9/XvMNGmh4TvEFmQnq/jx5av3kUHGxWWK+zkTIFCf/ja+Spt14WaYxHGIQPxy7YRzx0tEroZrx7uyrQ8ZiviBIB2AKtLhY4d75mTX43lMBwr+8DvSiv6PSbASusJCZL4ST2C0OwTfE53gcdefKOuRkvAPxzAnJaA1YZGG6kOxQUeQHlnRCPfkEAQrfxU5evHAkMH8vJMxMcLPm/zBlkSOqfM91fLjcu7yQSBGGBKai85u7A/aN8AtWfA2+GxTlotLrmLgZClhBZNhVHgGrY1+tNTyYJw5mPE2gfltg7kxRw1526rZJiEDeqJdQuXewEZ+zYkd4vHtxkfllzAGVeVheCVVQ+NNMqkwt7W0pIZ4iwvnXQnif8b9pagfeE0sC7jEdm92hmw5jYg6fYyAGhPyUoP7ycX7rC22rtgBKpcUavO5QSaMg+CBjEJwhN4gAb3HJvlMpx8LQsX517oE0fis6AOczOwhnv++6WYN8Jes="
-    - secure: "A9+MYzaZhesrIQmz/BZm2i3Ix/SH6//OD30WSQKoWMDbN51b0xJNL68RQ92WMAbNkDco2mmoWOXjNWXHjL79sUsHcV4L+0TPcjZ1gFk1nt3llb8klyDNpsgdNkzsJvYR/KRM+gCKh3ZprWildEdqcEhsjtKVzPLWBLGZy22RVcPFGSsLyQ1V+tu64eTsPMJgUUKoYaEQsbM8PIi9JrZqJZMnLFj8DRhAzCOZ1IjeZFFgUNYJH5SYI6crZgAPKv3qNPg/t9qU3JyN4Iq5mtTgy6K0TwJEcvfseoXfixjjdh0RX0nNBSxmfp8Wu+/LnVeGbKzck18oquztSycLR+Zq/yfHSAts60KCPe694/nXzNNCKhQYG2dqfQ44o/MtwY4M60nDjooKUiXbd2QtF0cpnHYH7FeE2fTNCRG9qn3IqD6LXxtZYCMTJ3SwXial7mssww7cS+0YpnL01IrBkIrigUbFw25ou6BOi9yl/ZE/sEBNzeAaljAT+UI7MjF54P+lLQui1LVxZuDWHTohAMzDd1vkUJS93QKrWx0epueEdlv5HLwMFXjCsTyBFsTce0hvaiuaLIeGb7+ckLM60PIBxeZUDCR/C5gjNzHWa+qXyQtNNjJ5ovhqZGxwvwDT5rjlesNQ/atCA6kYfmQRagnx34Dgf7x9NGPVOZdPgYLoRS4="
+    - secure: VGwcg3UmZWWGU6PNybD/xJIUvJUroNcdF3qMHvepq0UO9abzs11wbyLZUl9ciD6SBfhu8CL1nQuhAZJOLcZg8rOzBTiLeOi2fVMsUble6ng3kkmlS0iMH6ClpxejGUay1qT3rKT0+DtxfmcuTHVUjReYvZSJXjskvw6Uunf89iU+sJRyzXSH5Zs8BlOAhSb300e23JAqWyUU1wDW4FuzjjiyUEpX9Gc/ima4hIzzX6JkbscZkaHaX11WO/S77dqcEIOqCdp6kGFLVviDnCSQOop1m4gWRWt8Q9TQ9GBcrexmGUtWqSsJ2TH5qudVewHfcCRBACI0S+Fi/Okbc2zeTEX9idLFprv1IEnvyOhIecuckzw30l+Blw6AimwUE96Y6H/wtVCVAhGzVbYOgG3UZI05k/5nI/3xJcR5c7iayXeTGvZqxKoo+FnPDdN7VY9xAOMX4Rg6HJLxy+XUQulsn3LQpg1/w+76Rlp7n7PQ5rk8qYgqNuMaWkFjittiQXkLwt4o4Y16dUWZZs2hLVbNBN26nARAIpEtSah/YO+ylW0spBESP19ixi8pXTYXE9t6kd7a1dYWmAgG9UwgXRCEEy/zyZIH8+06rzo2RrnclyK+kR7JhWScsafCZ/jGHPpTiAynMdsKgW8WkWjbhKbmbeBJWOWHq/8HfULZXG2aWxM=
+    - secure: tc+Y4LwCvtXQWLhDSwk/4EKsOo7+3bc25x4+NSCsgZ7BXIgmuSBpfNMELPxThz5BkRWNXfLsNDbdkngXtcot9z21GBFWKJuA+SZ5ZTIFGWQfbFQJGdmzF9JhmSjyhObnlgbggRTDnkq1HKirh7TwXhR5VXcVno4pzH7qH7djuj4h6mw76uXaoUEce6pjmuW3gm9/XvMNGmh4TvEFmQnq/jx5av3kUHGxWWK+zkTIFCf/ja+Spt14WaYxHGIQPxy7YRzx0tEroZrx7uyrQ8ZiviBIB2AKtLhY4d75mTX43lMBwr+8DvSiv6PSbASusJCZL4ST2C0OwTfE53gcdefKOuRkvAPxzAnJaA1YZGG6kOxQUeQHlnRCPfkEAQrfxU5evHAkMH8vJMxMcLPm/zBlkSOqfM91fLjcu7yQSBGGBKai85u7A/aN8AtWfA2+GxTlotLrmLgZClhBZNhVHgGrY1+tNTyYJw5mPE2gfltg7kxRw1526rZJiEDeqJdQuXewEZ+zYkd4vHtxkfllzAGVeVheCVVQ+NNMqkwt7W0pIZ4iwvnXQnif8b9pagfeE0sC7jEdm92hmw5jYg6fYyAGhPyUoP7ycX7rC22rtgBKpcUavO5QSaMg+CBjEJwhN4gAb3HJvlMpx8LQsX517oE0fis6AOczOwhnv++6WYN8Jes=
+    - secure: A9+MYzaZhesrIQmz/BZm2i3Ix/SH6//OD30WSQKoWMDbN51b0xJNL68RQ92WMAbNkDco2mmoWOXjNWXHjL79sUsHcV4L+0TPcjZ1gFk1nt3llb8klyDNpsgdNkzsJvYR/KRM+gCKh3ZprWildEdqcEhsjtKVzPLWBLGZy22RVcPFGSsLyQ1V+tu64eTsPMJgUUKoYaEQsbM8PIi9JrZqJZMnLFj8DRhAzCOZ1IjeZFFgUNYJH5SYI6crZgAPKv3qNPg/t9qU3JyN4Iq5mtTgy6K0TwJEcvfseoXfixjjdh0RX0nNBSxmfp8Wu+/LnVeGbKzck18oquztSycLR+Zq/yfHSAts60KCPe694/nXzNNCKhQYG2dqfQ44o/MtwY4M60nDjooKUiXbd2QtF0cpnHYH7FeE2fTNCRG9qn3IqD6LXxtZYCMTJ3SwXial7mssww7cS+0YpnL01IrBkIrigUbFw25ou6BOi9yl/ZE/sEBNzeAaljAT+UI7MjF54P+lLQui1LVxZuDWHTohAMzDd1vkUJS93QKrWx0epueEdlv5HLwMFXjCsTyBFsTce0hvaiuaLIeGb7+ckLM60PIBxeZUDCR/C5gjNzHWa+qXyQtNNjJ5ovhqZGxwvwDT5rjlesNQ/atCA6kYfmQRagnx34Dgf7x9NGPVOZdPgYLoRS4=
     - COMMIT=${TRAVIS_COMMIT::7}
 
 script:
-  - ./mvnw clean install -B
+  - "./mvnw clean install -B"
 
 after_success:
   - docker login -u $DOCKER_USER -p $DOCKER_PASS
-  - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo "$TRAVIS_BRANCH"; fi`
-  - export IMAGE_NAME=simpleapi/main-repo
+  - export TAG=`if [ "$TRAVIS_BRANCH" == "main" ]; then echo "latest"; else echo "$TRAVIS_BRANCH"; fi`
+  - export IMAGE_NAME=natrofl/simpleapi
   - docker build -t $IMAGE_NAME:latest .
   - docker tag $IMAGE_NAME:latest $IMAGE_NAME:$TAG
   - docker push $IMAGE_NAME:$TAG
 
 deploy:
   provider: heroku
-  api_key: $HEROKU_API_KEY
-  app: simpleapi-mt
+  api_key: "$HEROKU_API_KEY"
+  app: simpleapi-sfilyagin
+  on:
+    branch: main

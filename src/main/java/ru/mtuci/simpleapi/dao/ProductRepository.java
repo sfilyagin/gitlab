@@ -8,7 +8,6 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.mtuci.simpleapi.model.Product;
 
 @Transactional(readOnly = true)
-// https://stackoverflow.com/questions/44409120/what-is-the-difference-between-transactional-and-transactionalreadonly-true
 public interface ProductRepository extends JpaRepository<Product, Long> {
     @Transactional
     @Modifying
