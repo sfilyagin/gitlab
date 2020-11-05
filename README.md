@@ -17,29 +17,26 @@
 
 ## Сборка приложения в Maven
 Для сборки выполнить команду:
-
 * ```mvnw clean install```
 
 Запустить базу данных:
-
-``` docker run --name postgres-docker -e POSTGRES_PASSWORD=root -p 5432:5432 postgres ```
+* ``` docker run --name postgres-docker -e POSTGRES_PASSWORD=root -p 5432:5432 postgres ```
 
 Инициализировать базу данных:
-
-``` docker cp ./src/main/resources/init.sql postgres-docker:/docker-entrypoint-initdb.d/init.sql ```
-
-``` docker exec -u postgres postgres-docker psql postgres postgres -f docker-entrypoint-initdb.d/init.sql ```
+* ``` docker cp ./src/main/resources/init.sql postgres-docker:/docker-entrypoint-initdb.d/init.sql ```
+* ``` docker exec -u postgres postgres-docker psql postgres postgres -f docker-entrypoint-initdb.d/init.sql ```
 
 ## Cборка Docker образов
-В файле  описан способ сборки в Docker двух контейнеров для их совместной работы как одно приложение. Docker-compose будет использовать  для сборки приложения:
+В файле docker-compose.yml описан способ сборки в Docker двух контейнеров для их совместной работы как одно приложение:
 Для сборки контейнеров выполнить команду:
-``` docker-compose build ```
+* ``` docker-compose build ```
+
 Для создания приложения выполнить команду:
- ``` docker-compose create ```
+* ``` docker-compose create ```
 
 ## Запуск Docker контейнеров
 Для запуска приложения выполнить команду:
-``` docker-compose up ```
+* ``` docker-compose up ```
 
 ## Работа с приложением
 Приложение запускает веб-сервер, доступный локально через сокет localhost:8080.
