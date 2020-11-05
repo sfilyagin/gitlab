@@ -22,7 +22,7 @@
 
 * Склонировать репозиторий
 * Для сборки, запуска приложения и его окружения необходимо из директории с кодовой базой выполнить команду __docker-compose up -d__
-* Сборка приложения выполняется в отдельном контейнере, затем создается образ с ojdk8 в который копируется артефакт (процедура сборки и копирования описана в Dockerfile)
+* Сборка приложения выполняется в отдельном контейнере, затем создается образ в который копируется неше приложение (процедура сборки и копирования описана в Dockerfile)
 #### Проверки
 
 ------------------------------------------------------------------------
@@ -30,9 +30,9 @@ __Status__
 * __getHostname:__ curl http://localhost/api/v1/status
 
 
-curl -X GET http://127.0.0.1:8080/api/v1/status
-curl -X GET http://localhost:8080/api/v1/products
-curl -X GET http://localhost:8080/api/v1/products/2
-curl -X DELETE http://localhost:8080/api/v1/products/2
+* curl -X GET http://127.0.0.1:8080/api/v1/status
+* curl -X GET http://localhost:8080/api/v1/products
+* curl -X GET http://localhost:8080/api/v1/products/2
+* curl -X DELETE http://localhost:8080/api/v1/products/2
 
 
