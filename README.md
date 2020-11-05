@@ -16,29 +16,23 @@
 * ```git clone https://github.com/sfilyagin/gitlab```
 
 ## Сборка приложения в Maven
-Для сборки в терминале выполнить команду:
+Для сборки выполнить команду:
 * ```mvnw clean install```
 
+Запустить базу данных:
+``` docker run --name postgres-docker -e POSTGRES_PASSWORD=root -p 5432:5432 postgres ```
+Инициализировать базу данных:
+``` docker cp ./src/main/resources/init.sql postgres-docker:/docker-entrypoint-initdb.d/init.sql ```
+``` docker exec -u postgres postgres-docker psql postgres postgres -f docker-entrypoint-initdb.d/init.sql ```
 
-Перед этим можно запустить и инициализировать базу данных
-Запустить базу данных можно так:
- ```
- docker run --name postgres-docker -e POSTGRES_PASSWORD=root -p 5432:5432 postgres
-```
-Инициализировать так: 
-```
-docker cp ./src/main/resources/init.sql postgres-docker:/docker-entrypoint-initdb.d/init.sql
-docker exec -u postgres postgres-docker psql postgres postgres -f docker-entrypoint-initdb.d/init.sql
-```
-
-## Cборка docker-образов
+## Cборка Docker образов
 В файле  описан способ сборки в Docker двух контейнеров для их совместной работы как одно приложение. Docker-compose будет использовать  для сборки приложения:
 Для сборки контейнеров выполнить команду:
 ``` docker-compose build ```
 Для создания приложения выполнить команду:
  ``` docker-compose create ```
 
-## Запуск docker-контейнеров
+## Запуск Docker контейнеров
 Для запуска приложения выполнить команду:
 ``` docker-compose up ```
 
@@ -51,5 +45,4 @@ __Status__
 * ```curl -X GET http://localhost:8080/api/v1/products```
 * ```curl -X GET http://localhost:8080/api/v1/products/2```
 * ```curl -X DELETE http://localhost:8080/api/v1/products/2```
-
 
