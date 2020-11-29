@@ -20,7 +20,7 @@
 * ```mvnw clean install```
 
 Запустить базу данных:
-* ``` docker run --name postgres-docker -e POSTGRES_PASSWORD=q1w2e3r4 -p 5432:5432 postgres ```
+* ``` docker run --name postgres-docker -e POSTGRES_PASSWORD=root -p 5432:5432 postgres ```
 
 Инициализировать базу данных:
 * ``` docker cp ./src/main/resources/init.sql postgres-docker:/docker-entrypoint-initdb.d/init.sql ```
