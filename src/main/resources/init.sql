@@ -1,4 +1,5 @@
 DROP TABLE IF EXISTS product CASCADE;
+CREATE SEQUENCE global_seq START WITH 1;
 
 CREATE TABLE product(
     id          INTEGER PRIMARY KEY DEFAULT nextval('global_seq'),

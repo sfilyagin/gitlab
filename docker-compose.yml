@@ -20,7 +20,7 @@ services:
 #      - POSTGRES_HOST=postgres
     restart: unless-stopped
 #    networks: ['mynetwork']
-    networks: localhost
+    networks: 192.168.99.100
   simpleapi:
     image: simpleapi:latest
     container_name: simple
@@ -35,8 +35,9 @@ services:
 #    links:
       - simpleapi
 #    networks: ['mynetwork']
-    networks: localhost
+    networks: 192.168.99.100
 volumes:
   postgres-data:
-    networks: localhost
+    networks: 192.168.99.100
 #networks: {mynetwork: {}}
+
