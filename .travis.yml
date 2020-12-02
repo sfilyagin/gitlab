@@ -4,5 +4,25 @@ language: java
 services:
   - postgresql
   - docker
-before_install:
-  - chmod +x mvnw
+env:
+  global:
+    - secure: "T9lgJZC8q57+bE5MCWQjnzkIfOe3e9CzhxA6QA="
+    - secure: "k4Yc2Wvclhqc79qQYMY8JBYVakDM2vwmfGRC28="
+    - secure: "Ajcf4DIdVNLQ8jehT+rZ2fvUhHonszOECV6XTY="
+    - COMMIT=${TRAVIS_COMMIT::7}
+
+script:
+  - ./mvnw clean install -B
+
+after_success:
+  - docker login -u $DOCKER_USER -p $DOCKER_PASS
+  - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo "$TRAVIS_BRANCH"; fi`
+  - export IMAGE_NAME=myapi/my-docker-repo
+  - docker build -t $IMAGE_NAME:latest .
+  - docker tag $IMAGE_NAME:latest $IMAGE_NAME:$TAG
+  - docker push $IMAGE_NAME:$TAG
+
+deploy:
+  provider: heroku
+  api_key: LZ0QDipINmKLvBK0zO89hw
+  app: simpleapi-sfilyagin
