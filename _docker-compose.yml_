@@ -1,7 +1,6 @@
-# Файл docker-compose должен начинаться с тега версии.
-# Мы используем "3" так как это - самая свежая версия на момент написания этого кода.
 version: "3.1"
 services:
+
   postgres:
     image: postgres:latest
     container_name: postgres
@@ -21,6 +20,7 @@ services:
     restart: unless-stopped
 #    networks: ['mynetwork']
     networks: 192.168.99.100
+
   simpleapi:
     image: simpleapi:latest
     container_name: simple
@@ -40,4 +40,3 @@ volumes:
   postgres-data:
     networks: 192.168.99.100
 #networks: {mynetwork: {}}
-
